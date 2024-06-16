@@ -1,20 +1,26 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
-    require: true,
+    required: true,
     minlength: 6,
   },
   profilePic: {
     type: String,
     default: '',
   },
+  boards: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Board',
+    },
+  ],
 })
 
 const User = mongoose.model('User', userSchema)
